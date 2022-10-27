@@ -1,9 +1,16 @@
 #include "list_queue.h"
 
-
 void init_queue(queue *q)
 {
-  // Add your init_queue
+
+	q->front = (malloc(sizeof(qnode)));
+	q->rear = (malloc(sizeof(qnode)));
+
+	//Sætter queue til at være tom
+	q->size = 0;
+	q->front = NULL;
+	q->rear = NULL;
+
 }
 
 int empty(queue *q)
