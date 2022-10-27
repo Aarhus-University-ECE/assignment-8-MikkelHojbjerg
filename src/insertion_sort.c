@@ -14,25 +14,28 @@ void sort(linked_list *llPtr){
 	node_t *curr = llPtr->head->next;
 	node_t *prev = llPtr->head;
 
-	printf("head = %d\n", llPtr->head->data);
-
 	//Kører hele listen igennem
-	while(curr != NULL){
+	while(prev->next != NULL){
+
+		printf("1\n");
 
 		//Tjekker om curr er mindre end prev, hvis ja skal curr flyttes
 		if(curr->data < prev->data){
 
+			printf("2\n");
+
 			//Temporary prev bliver brugt til at vide hvor curr skal flyttes hen
 			node_t *temp_prev = llPtr->head;
 
-			/*Curr skal have en ny plads mellem intervallet head(temp_prev) og prev.
-			Derfor hedder loopet temp_prev != prev.
-			*/
-
+			//Looper indtil temp_prev->next er NULL
 			while(temp_prev->next != NULL){
+
+				printf("3\n");
 
 				//Tjekker om curr er mindre end head
 				if(curr->data < llPtr->head->data){
+
+					printf("4\n");
 
 					prev = curr->next;
 					curr->next = llPtr->head;
@@ -44,26 +47,46 @@ void sort(linked_list *llPtr){
 
 				//Hvis tjekker om det næste element i listen er mindre end curr
 				if(curr->data > temp_prev->next->data){
+
+					printf("5\n");
+
 					//Hvis ja rykker temp_prev et element op i listen
 					temp_prev = temp_prev->next;
 				}else{
-					//Hvis det næste element er større end curr, rykkes curr på dens rette plads
 
-					prev->next = curr->next;
+					printf("6\n");
 
-					curr->next = temp_prev->next;
+					if(curr->next !=NULL){
 
-					temp_prev->next = curr;
+						printf("!=NULL\n");
 
-					curr = prev->next;
+						//Hvis det næste element er større end curr, rykkes curr på dens rette plads
+						prev->next = curr->next;
+						curr->next = temp_prev->next;
+						temp_prev->next = curr;
 
-					break;
+						//curr bliver nu sat til det næste element i listen
+						curr = prev->next;
+						break;
+					}else{
+
+						printf("NULL\n");
+
+						prev->next = NULL;
+						curr->next = temp_prev->next;
+						temp_prev->next = curr;
+
+						printf("prev->next: %d\n", prev->next);
+
+						break;
+					}
+
 				}
 
 			}
 
-
 		}else{
+			//curr og prev rykker et element frem i listen
 			curr = curr->next;
 			prev = prev->next;
 
