@@ -1,4 +1,6 @@
 #include "list_queue.h"
+#include <stdio.h>
+#include <assert.h>
 
 void init_queue(queue *q)
 {
@@ -16,16 +18,51 @@ void init_queue(queue *q)
 int empty(queue *q)
 {
 
-	return (q->size <= 0);
+	if(q->size <= 0){
+		return 1;
+	}else{
+		return 0;
+	}
 
 }
 
 void enqueue(queue *q, int x)
 {
 
+	q->front = (malloc(sizeof(qnode)));
+	q->rear = (malloc(sizeof(qnode)));
+
+	if(q->size == 0){
+		q->front->data = x;
+		q->size++;
+	}else{
+
+
+		q->size++;
+	}
+
 }
 
 int dequeue(queue *q)
 {
-  // Add your dequeue function
+
+	q->front = (malloc(sizeof(qnode)));
+	q->rear = (malloc(sizeof(qnode)));
+
+	qnode *fifoData;
+
+	fifoData->data = q->front->data;
+
+	if(q->rear->next != NULL){
+		qnode *temp = q->front->next;
+		free(q->front);
+		q->front = temp;
+		q->size--;
+	}else{
+		fifoData->data = q->rear->data;
+		q->size--;
+	}
+
+	return fifoData->data;
+
 }
