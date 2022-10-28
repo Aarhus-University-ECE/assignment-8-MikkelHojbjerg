@@ -7,20 +7,22 @@ void init_queue(queue *q)
 	q->rear = (malloc(sizeof(qnode)));
 
 	//Sætter queue til at være tom
-	q->size = 0;
-	q->front = NULL;
 	q->rear = NULL;
+	q->front = NULL;
+	q->size = 0;
 
 }
 
 int empty(queue *q)
 {
-  // Add your empty function  
+
+	return (q->size <= 0);
+
 }
 
 void enqueue(queue *q, int x)
 {
-  // Add your enqueue function
+
 }
 
 int dequeue(queue *q)
