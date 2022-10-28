@@ -18,6 +18,7 @@ void init_queue(queue *q)
 int empty(queue *q)
 {
 
+	//Tjekker om queue er tomt
 	if(q->size <= 0){
 		return 1;
 	}else{
@@ -29,40 +30,48 @@ int empty(queue *q)
 void enqueue(queue *q, int x)
 {
 
-	q->front = (malloc(sizeof(qnode)));
-	q->rear = (malloc(sizeof(qnode)));
+	//den ny node bliver lavet til som en holder for den indkommende værdi
+	qnode *newList = (malloc(sizeof(qnode)));
 
-	if(q->size == 0){
-		q->front->data = x;
-		q->size++;
+	//newList bliver tildelt værdien
+	newList->data = x;
+
+	//Hvis rear er NULL er listen tom
+	if(q->rear == NULL){
+		q->rear = newList;
+		q->front = newList;
+		//Laver en rear->next
+		q->rear->next == NULL;
 	}else{
+		//Hvis listen ikke er tom
 
-
-		q->size++;
+		//rear->next får den nye værdi og rear rækker en gang op
+		q->rear->next = newList;
+		q->rear = q->rear->next;
 	}
+
+	q->size += 1;
 
 }
 
 int dequeue(queue *q)
 {
 
-	q->front = (malloc(sizeof(qnode)));
-	q->rear = (malloc(sizeof(qnode)));
+	//val får værdien af listen som kom ligger først i stacken
+	int val = q->front->data;
 
-	qnode *fifoData;
+	//front skal flyttes en gang frem, da den nuværende front er blevet poppet
+	q->front = q->front->next;
 
-	fifoData->data = q->front->data;
+	q->size -= 1;
 
-	if(q->rear->next != NULL){
-		qnode *temp = q->front->next;
-		free(q->front);
-		q->front = temp;
-		q->size--;
-	}else{
-		fifoData->data = q->rear->data;
-		q->size--;
+	//Hvis størrelsen af køen er = 0, betyder det at køen er tom
+	if(q->size == 0){
+		//Derfor sættes rear = NULL, så den er klar til næste gang der skal pushes
+		q->rear = NULL;
 	}
 
-	return fifoData->data;
+	return val;
+
 
 }

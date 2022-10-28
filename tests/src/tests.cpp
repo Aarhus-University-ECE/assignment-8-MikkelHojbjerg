@@ -107,14 +107,13 @@ TEST_CASE("linked_queue")
     enqueue(&q1, 5);
     REQUIRE(empty(&q1) == 0);
     dequeue(&q1);
-    REQUIRE(empty(&q1) == 1); 
+    REQUIRE(empty(&q1) == 1);
 
     // Test enqueue then dequeue
     enqueue(&q1,-5);
     enqueue(&q1,10);
     enqueue(&q1,0);
     enqueue(&q1,5);
-   
 
     REQUIRE(-5 == dequeue(&q1));
     REQUIRE(10 == dequeue(&q1));
